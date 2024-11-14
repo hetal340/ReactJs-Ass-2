@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Validation</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #ffefba, #ffffff); /* Light yellow to white gradient */
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 20px; /* Added padding to body */
+        }
+
+        form {
+            background-color: rgba(255, 255, 255, 0.9); /* Slightly transparent white background */
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        }
+
+        input {
+            padding: 12px;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            width: 100%;
+            margin-bottom: 10px;
+            transition: border-color 0.3s;
+        }
+
+        input:focus {
+            border-color: #007bff; /* Change border color on focus */
+            outline: none; /* Remove outline */
+        }
+
+        .error {
+            color: red;
+            font-size: 12px;
+            display: none; /* Hidden by default */
+        }
+
+        button {
+            background-color: #28a745; /* Green button */
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 12px;
+            cursor: pointer;
+            width: 100%;
+            font-weight: bold;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        button:hover {
+            background-color: #218838; /* Darker green on hover */
+            transform: translateY(-2px); /* Lift effect on hover */
+        }
+
+        button:active {
+            transform: translateY(1px); /* Down effect on click */
+        }
+    </style>
+</head>
+<body>
+
+<form id="myForm">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name">
+    <div class="error" id="errorMessage">This field cannot be empty.</div>
+    <button type="submit">Submit</button>
+</form>
+
+<script>
+    $(document).ready(function() {
+        $('#myForm').on('submit', function(e) {
+            e.preventDefault(); // Prevent the form from submitting
+
+            const nameInput = $('#name');
+            const errorMessage = $('#errorMessage');
+
+            // Check if the input field is empty
+            if (nameInput.val().trim() === '') {
+                errorMessage.show(); // Show error message
+            } else {
+                errorMessage.hide(); // Hide error message
+                // Proceed with form submission or further processing
+                alert('Form submitted successfully!'); // Replace with actual submission logic
+            }
+        });
+    });
+</script>
+
+</body>
+</html>

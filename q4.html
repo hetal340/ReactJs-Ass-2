@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Slider</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #8e44ad, #e74c3c); /* Gradient background with purple and pink */
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+        }
+
+        #slider {
+            position: relative;
+            width: 600px;
+            height: 400px;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        }
+
+        #slider img {
+            width: 100%;
+            height: 100%;
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            border-radius: 15px;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        #slider img.active {
+            display: block;
+            opacity: 1;
+        }
+
+        .buttons {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+        }
+
+        .button {
+            background: linear-gradient(135deg, #007bff, #00c6ff);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        .button:hover {
+            background: linear-gradient(135deg, #0056b3, #007bff);
+            transform: translateY(-3px);
+        }
+
+        .button:active {
+            transform: translateY(1px);
+        }
+    </style>
+</head>
+<body>
+
+<div id="slider">
+    <img src="img1.jpg" class="active">
+    <img src="img2.jpg">
+    <img src="img3.jpg">
+    
+    <div class="buttons">
+        <button class="button" id="prevBtn">Previous</button>
+        <button class="button" id="nextBtn">Next</button>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        let currentIndex = 0;
+        const images = $('#slider img');
+        const totalImages = images.length;
+
+        // Show the first image
+        images.eq(currentIndex).addClass('active');
+
+        // Next button click
+        $('#nextBtn').click(function() {
+            images.eq(currentIndex).removeClass('active');
+            currentIndex = (currentIndex + 1) % totalImages; // Loop back to the start
+            images.eq(currentIndex).addClass('active');
+        });
+
+        // Previous button click
+        $('#prevBtn').click(function() {
+            images.eq(currentIndex).removeClass('active');
+            currentIndex = (currentIndex - 1 + totalImages) % totalImages; // Loop back to the end
+            images.eq(currentIndex).addClass('active');
+        });
+    });
+</script>
+
+</body>
+</html>
